@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/adc/adc.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/main.h</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/main.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/lcd/lcd.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/pwm/pwm.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/i2c/i2c.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/timer/timer.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/interrupt/interrupt.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/PICKITMPLAB/He%20Thong%20Nhung%20-%20VDK%209/Bai9_TRAFFIC_UART/simulate_machine/simulate_machine.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/lcd/lcd.h</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/uart/uart.h</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/button_matrix/button.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/nbproject/Makefile-default.mk</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/uart/uart.c</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/simulate_machine/simulate_machine.h</file>
+            <file>file:/E:/StudyFiles/DoAn_TKLL/Traffic-Light/button_matrix/button.h</file>
+        </group>
+    </open-files>
+</project-private>
