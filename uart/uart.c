@@ -1,6 +1,6 @@
 #include "uart.h"
 #include "..\timer\timer.h"
-
+#include "..\lcd\lcd.h"
 void init_uart()
 {
 
@@ -19,7 +19,7 @@ void init_uart()
 
 	PIR1bits.RCIF = 0;  // clear interrupt flag uart
 	PIE1bits.RCIE = 1;	//enable interrupt uart
-	IPR1bits.RCIP = 0;	// Priority: low
+	IPR1bits.RCIP = 1;	// Priority: low
 	TRISCbits.RC6 = 0; // RC6 output
 	TRISCbits.RC7 = 1; // RC7 input
 }
@@ -89,12 +89,5 @@ unsigned long uart_power_of(int A, int x)
             temp *= A;
     return temp;
 }
-//void uart_isr()
-//{
-//    //uart_isr_simulate_machine();
-//    unsigned char tempReceive;
-//    tempReceive = RCREG;
-//    LcdPrintStringS(1,0,"   ");
-//    LcdPrintNumS(1,0,tempReceive);
-//}
+
 

@@ -105,13 +105,13 @@ void high_isr(void)
 		timer1_isr();
 	}
 
-	if (PIR1bits.TMR2IF) // timer2
-	{
-		stop_timer2();
-		PIR1bits.TMR2IF = 0;
-		start_timer2();
-		timer2_isr();
-	}
+//	if (PIR1bits.TMR2IF) // timer2
+//	{
+//		stop_timer2();
+//		PIR1bits.TMR2IF = 0;
+//		start_timer2();
+//		timer2_isr();
+//	}
 
 	if (PIR2bits.TMR3IF) // timer3
 	{

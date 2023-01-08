@@ -1,4 +1,5 @@
 #include "main.h"
+#include <ctype.h>
 // Noi khai bao hang so
 #define     LED     PORTD
 #define     ON      1
@@ -97,7 +98,7 @@ void LockDoor();
 #define     SET_YELLOW_2        22
 #define     SET_GREEN           21
 #define     SET_GREEN_2         23
-    //We don't need to set red value because RED_TIME = YELLOW_TIME + GREEN_TIME
+//We don't need to set red value because RED_TIME = YELLOW_TIME + GREEN_TIME
 //Manual mode
 #define    MANUAL_RED           30
 #define    MANUAL_GREEN         31
@@ -133,66 +134,220 @@ char* menu[NUM_OPTIONS] = {
 ////////////////////////////////////////////////////////////////////
 //Hien thuc cac chuong trinh con, ham, module, function duoi cho nay
 ////////////////////////////////////////////////////////////////////
+//Command format: !cmd#
+unsigned char cmd, cmd_get[20], get_cmd;
+#define UART_INIT   100
+#define UART_READ   101
+#define UART_END    102
 
-unsigned char cmd;
+//void uart_isr()
+//{
+//    cmd = RCREG;
+//    switch(uart_status) {
+//        case UART_INIT:
+//            if (cmd == '!') {
+//                uart_status = UART_READ;
+//                UartSendString("Start reading\r\n");
+//            }
+//            break;
+//        case UART_READ:
+//            if (cmd != '#') {
+//                get_cmd = cmd;
+//            }
+//            else {
+//                uart_status = UART_END;
+//                UartSendString("Ends at index");
+//                UartSendNumToString(idx);
+//                UartSendString("\r\n");
+//            }
+//            break;
+//        case UART_END:
+//            if (get_cmd == 'A') {
+//                status = RG;
+//            }
+//            else if (get_cmd == 'C') {
+//                status = CAUTION;
+//            }
+//            else if (get_cmd == 'Y') {
+//                status = SET_YELLOW;
+//            }
+//            else if (get_cmd == 'G') {
+//                status = SET_GREEN;
+//            }
+////            if (cmd_get[0] == 'A' && cmd_get[1] == 'U' && cmd_get[2] == 'T' && cmd_get[3] == 'O') {
+////                status = RG;
+////            }
+////            else if (cmd_get[0] == 'S' && cmd_get[1] == 'E' && cmd_get[2] == 'T' && cmd_get[3] == 'Y') {
+////                int digit1, digit2;
+////                if (cmd_get[4] - '0' >= 0 && cmd_get[4] - '0' <= 9) {
+////                    digit1 = cmd_get[4] - '0';
+////                }
+////                if (cmd_get[5] - '0' >= 0 && cmd_get[5] - '0' <= 9) {
+////                    digit2 = cmd_get[5] - '0';
+////                }
+////                timeY = digit1*10 +digit2;
+////            }
+//            idx = 0;
+//            uart_status = UART_INIT;
+//            break;
+//        default: 
+//            break;
+//    }
+//}
+void test_key();
+unsigned char rBuffer[20];
+unsigned char idx = 0;
+unsigned char rFlag = 0;
+unsigned char verify = 0;
+int digit1, digit2;
 void uart_isr()
 {
-    //uart_isr_simulate_machine();
-    cmd = RCREG;
-    if (cmd == 'A') {
-        select = 1;
-        cmd = 'Z';
+    unsigned char tempReceive;
+    tempReceive = RCREG;
+    rBuffer[idx] = tempReceive;
+    //UartSendString("\r\n");
+    if (verify == 0) {
+        if (rBuffer[idx] == 'A') verify = 1;
+        else if (rBuffer[idx] == 'M') verify = 11;
+        else if (rBuffer[idx] == 'S') verify = 21;
+        else if (rBuffer[idx] == 'C') verify = 31;
+        else if (rBuffer[idx] == 'Q') verify = 41;
     }
-    else if (cmd == 'M') {
-        select = 2;
-        cmd = 'Z';
+    else if (verify == 1) {
+        if (rBuffer[idx] == 'U') verify = 2;
     }
-    else if (cmd == 'S') {
-        select = 3;
-        cmd = 'Z';
+    else if (verify == 2) {
+        if (rBuffer[idx] == 'T') verify = 3;
     }
-    else if (cmd == 'C') {
-        select = 4;
-        cmd = 'Z';
+    else if (verify == 3) {
+        if (rBuffer[idx] == 'O') {
+            verify = 0;
+            status = RG;
+            timeR = TIME_R;
+            timeY = TIME_Y;
+            timeG = TIME_G;
+        }
     }
+    else if (verify == 11) {
+        if (rBuffer[idx] == 'A') verify = 12;
+    }
+    else if (verify == 12) {
+        if (rBuffer[idx] == 'N') {
+            verify = 0;
+            status = MANUAL_RED;
+            timeG_man = 3;
+        }
+    }
+    else if (verify == 21) {
+        if (rBuffer[idx] == 'E') verify = 22;
+    }
+    else if (verify == 22) {
+        if (rBuffer[idx] == 'T') verify = 23;
+    }
+    else if (verify == 23) {
+        if (rBuffer[idx] == 'Y') verify = 24;
+        else if (rBuffer[idx] == 'G') verify = 26;
+    }
+    else if (verify == 24) {
+        if (rBuffer[idx] - '0' >= 0 && rBuffer[idx] - '0' <= 9) {
+            digit1 = rBuffer[idx] - '0';
+            verify = 25;
+        }
+        else {
+            verify = 0;
+            UartSendString("Invalid time. Please try again.\r\n");
+        }
+        
+    }
+    else if (verify == 25) {
+        if (rBuffer[idx] - '0' >= 0 && rBuffer[idx] - '0' <= 9) {
+            digit2 = rBuffer[idx] - '0';
+            TIME_Y = digit1*10 + digit2;
+            verify = 0;
+            UartSendString("Set yellow time = ");
+            UartSendNumToString(TIME_Y);
+            UartSendString(" by using UART.\r\n");
+            TIME_R = TIME_G + TIME_Y;
+        }
+        else {
+            verify = 0;
+            UartSendString("Invalid time. Please try again.\r\n");
+        }
+    }
+    else if (verify == 26) {
+        if (rBuffer[idx] - '0' >= 0 && rBuffer[idx] - '0' <= 9) {
+            digit1 = rBuffer[idx] - '0';
+            verify = 27;
+        }
+        else {
+            verify = 0;
+            UartSendString("Invalid time. Please try again.\r\n");
+        }
+    }
+    else if (verify == 27) {
+        if (rBuffer[idx] - '0' >= 0 && rBuffer[idx] - '0' <= 9) {
+            digit2 = rBuffer[idx] - '0';
+            TIME_G = digit1*10 + digit2;
+            verify = 0;
+            UartSendString("Set green time = ");
+            UartSendNumToString(TIME_G);
+            UartSendString(" by using UART.\r\n");
+            TIME_R = TIME_G + TIME_Y;
+        }
+        else {
+            verify = 0;
+            UartSendString("Invalid time. Please try again.\r\n");
+        }
+    }
+    else if (verify == 31) {
+        if (rBuffer[idx] == 'A') verify = 32;
+    }
+    else if (verify == 32) {
+        if (rBuffer[idx] == 'U') {
+            verify = 0;
+            status = CAUTION;
+        }
+    }
+    else if (verify == 41) {
+        if (rBuffer[idx] == 'U') verify = 42;
+    }
+    else if (verify == 42) {
+        if (rBuffer[idx] == 'I') verify = 43;
+    }
+    else if (verify == 43) {
+        if (rBuffer[idx] == 'T') {
+            status = INIT_SYSTEM;
+            verify = 0;
+            UartSendString("Back to menu.\r\n");
+        }
+    }
+    idx = (idx + 1) % 20;
+    rFlag++;
 }
-void test_key();
-
 void main(void)
 {
     int counterSEG = 0;
 	unsigned int k = 0;
 	init_system();
         //delay_ms(1000);
-        TRISD = 0x00;
+    TRISD = 0x00;
         //TRISC_OUT = 0x00;
         //uart_isr_simulate_machine();
 	while (1)
 	{
-        uart_isr();
+        
         //DisplayLcdScreen();
         //test_key();
  //       scan_key_matrix();
         if (flag_timer3) {
             flag_timer3 = 0;
-            scan_key_matrix(); // 8 button
+            uart_isr();
+            scan_key_matrix_with_uart_i2c();
             AppTrafficLight();
-            //LcdPrintStringS(0, 0, "HELLO");
 
             //DisplayDataReceive();
-            DisplayLcdScreen(); //Output process 14ms vs 10ms with no timer
+            //DisplayLcdScreen(); //Output process 14ms vs 10ms with no timer
             //UartSendString(" ABC \r\n");    
-        }
-//            display_seven_seg();
-        if (flag_timer0) {
-            flag_timer0 = 0;
-            if (counterSEG == 1) {
-                display_seven_seg();
-                counterSEG = 0;
-            } else {
-                counterSEG++;
-            }
-            
         }
         
         DisplayLcdScreen();
@@ -253,7 +408,7 @@ void init_system(void)
     lcd_clear();
     LcdClearS();
     delay_ms(500);
-   init_timer0(4695);//dinh thoi 1ms sai so 1%
+    init_timer0(4695);//dinh thoi 1ms sai so 1%
     init_timer3(46950);//dinh thoi 10ms
     SetTimer0_ms(2);
     SetTimer3_ms(50); //Chu ky thuc hien viec xu ly input,proccess,output
@@ -262,66 +417,92 @@ void init_system(void)
     
 }
 
-unsigned char number[10] = {0b0000,0b0001,0b0010,0b0011,0b0100,0b0101,0b0110,0b0111,0b1000,0b1001};
-
 void init_seven_seg() {
     TRIS_SEVEN_SEG = 0x00;
     PORT_SEVEN_SEG = 0x00;
     TRISE = 0x00;
 }
 
-int indexSEG = 0;
-void display_seven_seg() {
-//    PORT_SEVEN_SEG = number[timeR % 10];
-    switch (indexSEG) {
-        case 0:          
-            OpenOutput(6);
-            CloseOutput(7);
-            PORTE = PORTE & ~arrayMapOfOutput[0];
-            PORTE = PORTE & ~arrayMapOfOutput[1];
-            PORTE = 0x00;
-            PORT_SEVEN_SEG = number[timeSEG / 1000];  
-            if (status != RG && status != RY && status != GR && status != YR && status != MANUAL_YELLOW_1 && status != MANUAL_YELLOW_2) {
-                PORT_SEVEN_SEG = number[0];
-            }
-            break;
-        case 1:        
-            CloseOutput(6);
-            OpenOutput(7);
-            PORTE = PORTE & ~arrayMapOfOutput[0];
-            PORTE = PORTE & ~arrayMapOfOutput[1];
-            PORTE = 0x00;
-            PORT_SEVEN_SEG = number[(timeSEG % 1000) / 100];   
-            if (status != RG && status != RY && status != GR && status != YR && status != MANUAL_YELLOW_1 && status != MANUAL_YELLOW_2) {
-                PORT_SEVEN_SEG = number[0];
-            }
-            break;
-        case 2:        
-            CloseOutput(6);
-            CloseOutput(7);
+const unsigned int Seg[10] = {
+  0b00000011,//0
+  0b10011111,//1
+  0b00100101,//2
+  0b00001101,//3
+  0b10011001,//4
+  0b01001001,//5
+  0b01000001,//6
+  0b00011111,//7
+  0b00000001,//8
+  0b00001001,//9
+};
+
+
+//////////// CODE SEVEN SEG 1/////////////
+void clock_signal_seg1(void){
+    OpenOutput(6);
+    CloseOutput(6);
+}
+void latch_enable_seg1(void)
+{
+    OpenOutput(7);
+    CloseOutput(7);
+}
+
+void send_byte_seg1(unsigned int data_out)
+{
+    int i;
+    for (i=0 ; i<8 ; i++)
+    {
+        if ((data_out >> i) & (0x01)) {
             PORTE = PORTE | arrayMapOfOutput[0];
-            PORTE = PORTE & ~arrayMapOfOutput[1];
-            PORTE = 0x01;
-            PORT_SEVEN_SEG = number[(timeSEG % 100) / 10];   
-            if (status != RG && status != RY && status != GR && status != YR && status != MANUAL_YELLOW_1 && status != MANUAL_YELLOW_2) {
-                PORT_SEVEN_SEG = number[0];
-            }
-            break;
-        case 3:        
-            CloseOutput(6);
-            CloseOutput(7);
-            PORTE = PORTE & ~arrayMapOfOutput[0];
-            PORTE = PORTE | arrayMapOfOutput[1];
-            PORTE = 0x02;
-            PORT_SEVEN_SEG = number[timeSEG % 10];  
-            if (status != RG && status != RY && status != GR && status != YR && status != MANUAL_YELLOW_1 && status != MANUAL_YELLOW_2) {
-                PORT_SEVEN_SEG = number[0];
-            }
-            break;
-        default:
-            break;
+        } else {
+            PORTE = PORTE & ~arrayMapOfOutput[0];            
+        }       
+        clock_signal_seg1();
     }
-    indexSEG = (indexSEG + 1) % 4;
+}
+
+void send_data_seg1(unsigned int number) {
+    send_byte_seg1(Seg[number % 10]);
+    send_byte_seg1(Seg[number / 10]);
+    latch_enable_seg1();
+}
+
+//////////// CODE SEVEN SEG 2/////////////
+void clock_signal_seg2(void){
+    PORT_SEVEN_SEG = 0b01;  
+    PORT_SEVEN_SEG = 0b00;    
+}
+void latch_enable_seg2(void)
+{
+    PORT_SEVEN_SEG = 0b10;  
+    PORT_SEVEN_SEG = 0b00; 
+}
+
+void send_byte_seg2(unsigned int data_out)
+{
+    int i;
+    for (i=0 ; i<8 ; i++)
+    {
+        if ((data_out >> i) & (0x01)) {
+            PORTE = PORTE | arrayMapOfOutput[1];
+        } else {
+            PORTE = PORTE & ~arrayMapOfOutput[1];            
+        }       
+        clock_signal_seg2();
+    }
+}
+
+void send_data_seg2(unsigned int number) {
+    send_byte_seg2(Seg[number % 10]);
+    send_byte_seg2(Seg[number / 10]);
+    latch_enable_seg2();
+}
+
+////////////DISPLAY SEVEN SEG/////////////
+void display_seven_seg() {
+    send_data_seg1(timeSEG % 100);
+    send_data_seg2(timeSEG / 100);
 }
 
 void OpenOutput(int index)
@@ -330,8 +511,6 @@ void OpenOutput(int index)
 	{
 		PORTD_OUT = PORTD_OUT | arrayMapOfOutput[index];
 	}
-
-
 }
 
 void CloseOutput(int index)
@@ -368,59 +547,60 @@ void TestOutput(void)
 	}
 }
 
-void Phase1_GreenOn()
-{
-    OpenOutput(0);
-}
-void Phase1_GreenOff()
-{
-    CloseOutput(0);
-}
+// void Phase1_GreenOn()
+// {
+//     OpenOutput(0);
+// }
+// void Phase1_GreenOff()
+// {
+//     CloseOutput(0);
+// }
 
-void Phase1_YellowOn()
-{
-    OpenOutput(4);
-}
-void Phase1_YellowOff()
-{
-    CloseOutput(4);
-}
+// void Phase1_YellowOn()
+// {
+//     OpenOutput(4);
+// }
+// void Phase1_YellowOff()
+// {
+//     CloseOutput(4);
+// }
 
-void Phase1_RedOn()
-{
-    OpenOutput(6);
-}
-void Phase1_RedOff()
-{
-    CloseOutput(6);
-}
+// void Phase1_RedOn()
+// {
+//     OpenOutput(6);
+// }
+// void Phase1_RedOff()
+// {
+//     CloseOutput(6);
+// }
 
-void Phase2_GreenOn()
-{
-    OpenOutput(1);
-}
-void Phase2_GreenOff()
-{
-    CloseOutput(1);
-}
+// void Phase2_GreenOn()
+// {
+//     OpenOutput(1);
+// }
+// void Phase2_GreenOff()
+// {
+//     CloseOutput(1);
+// }
 
-void Phase2_YellowOn()
-{
-    OpenOutput(5);
-}
-void Phase2_YellowOff()
-{
-    CloseOutput(5);
-}
+// void Phase2_YellowOn()
+// {
+//     OpenOutput(5);
+// }
+// void Phase2_YellowOff()
+// {
+//     CloseOutput(5);
+// }
 
-void Phase2_RedOn()
-{
-    OpenOutput(7);
-}
-void Phase2_RedOff()
-{
-    CloseOutput(7);
-}
+// void Phase2_RedOn()
+// {
+//     OpenOutput(7);
+// }
+// void Phase2_RedOff()
+// {
+//     CloseOutput(7);
+// }
+
 //void setTrafficLight(int state[6]) {
 //    int i;
 //    for(i = 0; i < 6; i++) {
@@ -514,6 +694,7 @@ void AppTrafficLight()
 //        display_seven_seg();
 //        cnt_led = 0;
 //    }
+    display_seven_seg();
     switch (status)
     {
         case INIT_SYSTEM:
@@ -532,7 +713,7 @@ void AppTrafficLight()
             if (isButton2Pressed()) {
                 switch(select) {
                     case 1:
-                        UartSendString("-----AUTOMATIC MODE-----\r\n");
+
                         status  = RG;
                         print_flag = 0;
                         break;
@@ -547,7 +728,6 @@ void AppTrafficLight()
                         print_flag = 0;
                         break;
                     case 4:
-                        UartSendString("CAUTION MODE\r\n");
                         status = CAUTION;
                         print_flag = 0;
                         break;
@@ -557,6 +737,10 @@ void AppTrafficLight()
             }
             break;
         case RG:
+            if (!print_flag) {
+                UartSendString("-----AUTOMATIC MODE-----\r\n");        
+                print_flag = 1;
+            }
             //LED = 0b00100001;
             OpenOutput(0);
             CloseOutput(1);
@@ -815,6 +999,7 @@ void AppTrafficLight()
             }
             break;
         case MANUAL_RED:
+            
             LcdClearS();
             LcdPrintStringS(0, 0, "RED");
             LcdPrintStringS(1, 0, "GREEN");
@@ -825,6 +1010,7 @@ void AppTrafficLight()
             CloseOutput(4);
             OpenOutput(5);
             if (!print_flag) {
+                UartSendString("-----MANUAL MODE-----\r\n");
                 UartSendString("[MANUAL]RED\r\n");
                 UartSendString("[MANUAL]GREEN\r\n");
                 print_flag = 1;
@@ -915,6 +1101,10 @@ void AppTrafficLight()
             if (isButton3Pressed() == 1) status = INIT_SYSTEM;
             break;
         case CAUTION:
+            if (!print_flag) {
+                UartSendString("CAUTION MODE\r\n");
+                print_flag = 1;
+            }
             LcdClearS();
             LcdPrintStringS(1, 0, "YELLOW");
             LcdPrintStringS(0, 0, "YELLOW");
