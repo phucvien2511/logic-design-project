@@ -2,70 +2,70 @@ Warning[2066] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 133 : type qualifier 
 Warning[2066] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 133 : type qualifier mismatch in assignment
 Warning[2066] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 133 : type qualifier mismatch in assignment
 Warning[2066] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 133 : type qualifier mismatch in assignment
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 345 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 346 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 353 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 365 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 366 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 367 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 368 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 371 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 374 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 377 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 380 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 402 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 403 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 405 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 406 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 408 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 409 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 632 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 635 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 638 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 639 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 701 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 725 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 751 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 752 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 753 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 785 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 786 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 787 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 822 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 823 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 824 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 856 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 857 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 858 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 885 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 886 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 887 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 898 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 899 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 903 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 913 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 922 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 933 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 934 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 935 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 946 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 947 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 951 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 952 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 957 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 972 : call of function without prototype
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1003 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1004 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1005 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1026 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 367 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 368 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 375 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 387 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 388 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 389 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 390 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 393 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 396 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 399 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 402 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 424 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 425 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 427 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 428 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 430 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 431 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 654 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 657 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 660 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 661 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 723 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 747 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 773 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 774 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 775 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 807 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 808 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 809 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 844 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 845 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 846 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 878 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 879 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 880 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 907 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 908 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 909 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 920 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 921 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 925 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 935 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 944 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 955 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 956 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 957 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 968 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 969 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 973 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 974 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 979 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 994 : call of function without prototype
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1025 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1026 : suspicious pointer conversion
 Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1027 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1028 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1047 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1048 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1048 : call of function without prototype
 Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1049 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1075 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1076 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1077 : suspicious pointer conversion
-Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1108 : call of function without prototype
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1109 : suspicious pointer conversion
-Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1110 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1050 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1069 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1070 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1071 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1097 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1098 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1099 : suspicious pointer conversion
+Warning[2058] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1130 : call of function without prototype
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1131 : suspicious pointer conversion
+Warning[2054] E:\StudyFiles\DoAn_TKLL\Traffic-Light\main.c 1132 : suspicious pointer conversion

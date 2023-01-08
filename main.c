@@ -212,6 +212,7 @@ void uart_isr()
         else if (rBuffer[idx] == 'S') verify = 21;
         else if (rBuffer[idx] == 'C') verify = 31;
         else if (rBuffer[idx] == 'Q') verify = 41;
+        else if (rBuffer[idx] == 'H') verify = 100;
     }
     else if (verify == 1) {
         if (rBuffer[idx] == 'U') verify = 2;
@@ -306,6 +307,7 @@ void uart_isr()
         if (rBuffer[idx] == 'U') {
             verify = 0;
             status = CAUTION;
+            UartSendString("Switch to caution mode by using UART.\r\n");
         }
     }
     else if (verify == 41) {
@@ -321,6 +323,26 @@ void uart_isr()
             UartSendString("Back to menu.\r\n");
         }
     }
+    else if (verify == 100) {
+        if (rBuffer[idx] == 'E') verify = 101;
+    }
+    else if (verify == 101) {
+        if (rBuffer[idx] == 'L') verify = 102;
+    }
+    else if (verify == 102) {
+        if (rBuffer[idx] == 'P') {
+                        UartSendString("Command list:\r\n");
+            UartSendString("1. AUTO - Switch to auto mode.\r\n");
+            UartSendString("2. MAN - Switch to manual mode.\r\n");
+            UartSendString("3. CAU - Switch to caution mode.\r\n");
+            UartSendString("4. SETYxx - Set yellow time = xx seconds.\r\n");
+            UartSendString("5. SETGxx - Set green time = xx seconds.\r\n");
+            UartSendString("6. QUIT - Back to menu.\r\n"); 
+            status = INIT_SYSTEM;
+            verify = 0;
+        }
+    }
+
     idx = (idx + 1) % 20;
     rFlag++;
 }
@@ -701,8 +723,8 @@ void AppTrafficLight()
             LcdClearS();
 //            //turnOffAllLEDs();
 //            status = RG;
-            timeR = TIME_R+1;
-            timeG = TIME_G+1;
+            timeR = TIME_R;
+            timeG = TIME_G;
             
 
             displayMenu();
@@ -770,7 +792,7 @@ void AppTrafficLight()
             else {
                 isPrint = 0;
                 status = RY;
-                timeG = TIME_G+1;
+                timeG = TIME_G;
             }
             if (isButton3Pressed()) status = INIT_SYSTEM;
             break;
@@ -805,7 +827,7 @@ void AppTrafficLight()
             else {
                 isPrint = 0;
                 status = GR;
-                timeR = TIME_R+1;
+                timeR = TIME_R;
                 timeY = TIME_Y;
             }
  
@@ -841,7 +863,7 @@ void AppTrafficLight()
             else {
                 isPrint = 0;
                 status = YR;
-                timeG = TIME_G+1;
+                timeG = TIME_G;
             }
             if (isButton3Pressed()) status = INIT_SYSTEM;
             break;
@@ -875,7 +897,7 @@ void AppTrafficLight()
             else {
                 isPrint = 0;
                 status = RG;
-                timeR = TIME_R+1;
+                timeR = TIME_R;
                 timeY = TIME_Y;
             }
             //LED = 0b01010000;
