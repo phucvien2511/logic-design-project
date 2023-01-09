@@ -234,10 +234,19 @@ void uart_isr()
     }
     else if (verify == 12) {
         if (rBuffer[idx] == 'N') {
-            verify = 0;
-            status = MANUAL_RED;
-            timeG_man = 3;
+            verify = 13;
         }
+    }
+    else if (verify == 13) {
+        if (rBuffer[idx] == 'R') {
+            status = MANUAL_RED;
+            UartSendString("Switch to manual red by using UART.\r\n");
+        }
+        else if (rBuffer[idx] == 'G') {
+            status = MANUAL_GREEN;
+            UartSendString("Switch to manual green by using UART.\r\n");
+        }
+        verify = 0;
     }
     else if (verify == 21) {
         if (rBuffer[idx] == 'E') verify = 22;
@@ -269,6 +278,8 @@ void uart_isr()
             UartSendNumToString(TIME_Y);
             UartSendString(" by using UART.\r\n");
             TIME_R = TIME_G + TIME_Y;
+            timeR = TIME_R;       
+            timeY = TIME_Y;
         }
         else {
             verify = 0;
@@ -294,6 +305,8 @@ void uart_isr()
             UartSendNumToString(TIME_G);
             UartSendString(" by using UART.\r\n");
             TIME_R = TIME_G + TIME_Y;
+            timeR = TIME_R;
+            timeG = TIME_G;
         }
         else {
             verify = 0;
@@ -689,8 +702,8 @@ void clearOldInput() {
     valueInput[1] = 0;
 }
 int set_state = 0;
-unsigned char flag_1s = 0, flag_5s = 0, flag_10s = 0;
-int cnt_1s = 0, cnt_5s = 0, cnt_10s = 0;
+unsigned char flag_1s = 0, flag_5s = 0, flag_10s = 0, flag_20s = 0;
+int cnt_1s = 0, cnt_5s = 0, cnt_10s = 0, cnt_20s = 0;
 int isPrint = 0;
 int set_flag = 0;
 int print_flag = 0;
@@ -703,6 +716,7 @@ void AppTrafficLight()
 {
     cnt_10s++; flag_10s = 0;
     cnt_1s++; flag_1s = 0;
+    cnt_20s++; flag_20s = 0;
     cnt_led++;
     if (cnt_1s == 17) {  
         cnt_1s = 0;
@@ -711,6 +725,10 @@ void AppTrafficLight()
     if (cnt_10s == 170) {
         cnt_10s = 0;
         flag_10s = 1;
+    }
+    if (cnt_20s == 380) {
+        cnt_20s = 0;
+        flag_20s = 1;
     }
 //    if (cnt_led == 1) {
 //        display_seven_seg();
@@ -726,11 +744,18 @@ void AppTrafficLight()
             timeR = TIME_R;
             timeG = TIME_G;
             
-
+            timeSEG = 0;
             displayMenu();
             if (isButton1Pressed()) {
                 select++;
                 if (select > 4) select = 1;
+                cnt_20s = 0;
+            }
+            else {
+                if (flag_20s) {
+                    status = RG;
+                    flag_20s = 0;
+                }
             }
             if (isButton2Pressed()) {
                 switch(select) {
@@ -794,7 +819,7 @@ void AppTrafficLight()
                 status = RY;
                 timeG = TIME_G;
             }
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case RY:
             //LED = 0b00100010;
@@ -831,7 +856,7 @@ void AppTrafficLight()
                 timeY = TIME_Y;
             }
  
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case GR:
             //LED = 0b00001100;
@@ -865,7 +890,7 @@ void AppTrafficLight()
                 status = YR;
                 timeG = TIME_G;
             }
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case YR:
             //LED = 0b00010100;
@@ -901,7 +926,7 @@ void AppTrafficLight()
                 timeY = TIME_Y;
             }
             //LED = 0b01010000;
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case SET_YELLOW:
             LcdClearS();
@@ -1037,12 +1062,12 @@ void AppTrafficLight()
                 UartSendString("[MANUAL]GREEN\r\n");
                 print_flag = 1;
             }
-
+            timeSEG = 0;
             if (isButton1Pressed() == 1) {
                 status = MANUAL_YELLOW_1;
                 print_flag = 0;
             }
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case MANUAL_GREEN:
             LcdClearS();
@@ -1059,11 +1084,12 @@ void AppTrafficLight()
                 UartSendString("[MANUAL]RED\r\n"); 
                 print_flag = 1;
             }
+            timeSEG = 0;
             if (isButton1Pressed() == 1) {
                 status = MANUAL_YELLOW_2;
                 print_flag = 0;
             }
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case MANUAL_YELLOW_1:
             LcdClearS();
@@ -1091,7 +1117,7 @@ void AppTrafficLight()
                 timeG_man = 3;
             }
 
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             break;
         case MANUAL_YELLOW_2:
             LcdClearS();
@@ -1119,7 +1145,7 @@ void AppTrafficLight()
                 status = MANUAL_RED;
                 timeG_man = 3;
             }
-            if (isButton3Pressed()) status = INIT_SYSTEM;
+            if (isButton3Pressed()) { status = INIT_SYSTEM; cnt_20s = 0; }
             if (isButton3Pressed() == 1) status = INIT_SYSTEM;
             break;
         case CAUTION:
